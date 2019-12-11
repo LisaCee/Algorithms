@@ -5,12 +5,10 @@ import argparse
 
 def find_max_profit(prices):
     totals = []
-    for i in range(0, len(prices)-1):
-        for j in range(1, len(prices) // 2):
-            if prices[j] < prices[i]:
-                difference = prices[i] - prices[j]
-                totals.append(difference)
-
+    for i in range(0, len(prices) - 1 // 2):
+        for j in range(i + 1, len(prices)):
+            difference = prices[j] - prices[i]
+            totals.append(difference)
     return max(totals)
 
 
