@@ -1,17 +1,23 @@
+# O(n) refactor
 def find_subarray(arr, total):
+    start = 0
+    end = 1
+    if len(arr) < 1:
+        return None
+    curr_sum = arr[start]
+    if curr_sum == total:
+        return (start, start)
 
-    for i in range(0, len(arr)):
-        # take the value we have at start index
-        current_sum = arr[i]
-        if current_sum == total:
-            return (i, i)
-        for j in range(i + 1, len(arr)):
-            current_sum += arr[j]
-            if current_sum == total:
-                return(i, j)
-            elif current_sum > total:
-                break
-
+    curr_sum += arr[end]
+    while start < len(arr) and end < len(arr):
+        if curr_sum == total:
+            return (start, end)
+        if curr_sum < total:
+            end += 1
+            curr_sum += arr[end]
+        if curr_sum > total:
+            curr_sum -= arr[start]
+            start += 1
     return None
 
 
@@ -20,6 +26,31 @@ print(find_subarray([1, 4, 0, 0, 3, 10, 5], 7))
 print(find_subarray([1, 4], 0))
 print(find_subarray([33], 33))
 print(find_subarray([], 2))
+
+# O(n^2)
+# def find_subarray(arr, total):
+
+#     for i in range(0, len(arr)):
+#         # take the value we have at start index
+#         current_sum = arr[i]
+#         if current_sum == total:
+#             return (i, i)
+#         for j in range(i + 1, len(arr)):
+#             current_sum += arr[j]
+#             if current_sum == total:
+#                 return(i, j)
+#             elif current_sum > total:
+#                 break
+
+#     return None
+
+
+# print(find_subarray([1, 4, 20, 3, 10, 5], 33))
+# print(find_subarray([1, 4, 0, 0, 3, 10, 5], 7))
+# print(find_subarray([1, 4], 0))
+# print(find_subarray([33], 33))
+# print(find_subarray([], 2))
+
 # unsorted array of pos ints, find continous subarray which adds to sum
 # return tuple with start/end indexes
 
