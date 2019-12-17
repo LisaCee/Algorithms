@@ -1,31 +1,73 @@
+import sys
+def eating_cookies(n, cache= {}):
+  if n < 0:
+    return 0
+  elif n < 1:
+    return 1
+  elif n in cache:
+    return cache[n]
+  else:
+    cache[n] = eating_cookies(n-3) + eating_cookies(n - 2) + eating_cookies(n-1)
+  return cache[n]
+
+print(eating_cookies(3))
+
+#   # refactor
+# def recurse(prev, n, all_results):
+#   if n == 0:
+#     all_results.append(prev)
+#     return
+#   recurse(prev + ['rock'], n-1, all_results)  
+#   recurse(prev + ['paper'], n-1, all_results)
+#   recurse(prev + ['scissors'], n-1, all_results)
+
+#   #add r, p or set
+#   new_r = prev + ["rock"]
+#   new_p = prev + ["paper"]
+#   new_s = prev + ["scissors"]
+
+#   n -= 1
+#   if n == 0:
+#     all_results.append(new_r)
+#     all_results.append(new_p)
+#     all_results.append(new_s)
+#     return
+#   recurse(new_r, n, all_results)  
+
+# def r_p_s(n):
+#   results = []
+#   recurse([], n, results)
+#   return results
+
+# print(r_p_s(2))
 # O(n) refactor
-def find_subarray(arr, total):
-    start = 0
-    end = 1
-    if len(arr) < 1:
-        return None
-    curr_sum = arr[start]
-    if curr_sum == total:
-        return (start, start)
+# def find_subarray(arr, total):
+#     start = 0
+#     end = 1
+#     if len(arr) < 1:
+#         return None
+#     curr_sum = arr[start]
+#     if curr_sum == total:
+#         return (start, start)
 
-    curr_sum += arr[end]
-    while start < len(arr) and end < len(arr):
-        if curr_sum == total:
-            return (start, end)
-        if curr_sum < total:
-            end += 1
-            curr_sum += arr[end]
-        if curr_sum > total:
-            curr_sum -= arr[start]
-            start += 1
-    return None
+#     curr_sum += arr[end]
+#     while start < len(arr) and end < len(arr):
+#         if curr_sum == total:
+#             return (start, end)
+#         if curr_sum < total:
+#             end += 1
+#             curr_sum += arr[end]
+#         if curr_sum > total:
+#             curr_sum -= arr[start]
+#             start += 1
+#     return None
 
 
-print(find_subarray([1, 4, 20, 3, 10, 5], 33))
-print(find_subarray([1, 4, 0, 0, 3, 10, 5], 7))
-print(find_subarray([1, 4], 0))
-print(find_subarray([33], 33))
-print(find_subarray([], 2))
+# print(find_subarray([1, 4, 20, 3, 10, 5], 33))
+# print(find_subarray([1, 4, 0, 0, 3, 10, 5], 7))
+# print(find_subarray([1, 4], 0))
+# print(find_subarray([33], 33))
+# print(find_subarray([], 2))
 
 # O(n^2)
 # def find_subarray(arr, total):
