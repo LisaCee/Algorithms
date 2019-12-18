@@ -3,17 +3,18 @@
 import sys
 
 
-def recurse(prev, n):
+def recurse(prev, n, all_results):
     if n == 0:
-        return prev
-    rock_move = recurse(prev + ['rock'], n-1)
-    paper_move = recurse(prev + ['paper'], n-1)
-    scissors_move = recurse(prev + ['scissors'], n-1)
-    return [rock_move, paper_move, scissors_move]
+        all_results.append(prev)
+        return
+    recurse(prev + ['rock'], n-1, all_results)
+    recurse(prev + ['paper'], n-1, all_results)
+    recurse(prev + ['scissors'], n-1, all_results)
 
 
 def rock_paper_scissors(n):
-    results = recurse([], n)
+    results = []
+    recurse([], n, results)
     return results
 
 
